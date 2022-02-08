@@ -1,19 +1,24 @@
-# This is a sample Python script.
+import socket
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Define the host as a tuple
 
+HOST, PORT = "", 8080,
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.bind((HOST,PORT))
+s.listen(True)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+print("Serving HTTP on port %s.." %PORT);
 
+while True:
+    client_connection, client_address = s.accept();
+    request = client_connection.recv(1024);  # Buffer Size
+    print(request.decode("utf-8"));  # Display the HTTP request
+    http_response = """/
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+HTTP/1.1 200 OK
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-
-hi shafiqah
-564545
+Welcome to Group 6 !
+"""
+    client_connection.sendall(bytes(http_response, "utf-8"))
+    client_connection.close();
