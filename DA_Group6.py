@@ -13,8 +13,11 @@ for x in h.headers:
     print("\t ", x, ":", h.headers[x])
 print("**********")
 headers = {
-    'User-agent': 'Mobile'
-}
+        'User-agent': 'Mobile'
+    }
+url2 = 'http://httpbin.org/headers'
+rh = requests.get(url2, headers=headers)
+print(rh.text)
 
 HOST, PORT = "", 8080,
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,5 +37,6 @@ HTTP/1.1 200 OK
 
 Welcome to Group 6 !
 """
+
     client_connection.sendall(bytes(http_response, "utf-8"))
     client_connection.close()
