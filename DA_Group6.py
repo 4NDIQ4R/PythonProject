@@ -40,3 +40,4 @@ Welcome to Group 6 !
 
     client_connection.sendall(bytes(http_response, "utf-8"))
     client_connection.close()
+
